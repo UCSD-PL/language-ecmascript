@@ -44,12 +44,19 @@ Library
     data-default >= 0.4 && <0.6,
     QuickCheck >= 2.5,
     template-haskell,
-    charset >= 0.3.2.1
+    charset >= 0.3.2.1,
+    unordered-containers,
+    hashable, 
+    -- hashable < 1.2, 
+    bytestring,
+    aeson <= 0.6.1.0,
+    vector,
+    text
   ghc-options:
     -fwarn-incomplete-patterns
   Exposed-Modules:
     Language.ECMAScript3 
-    Language.ECMAScript3.Token
+    Language.ECMAScript3.Text.Parsec.Token
     Language.ECMAScript3.Lexer 
     Language.ECMAScript3.Parser
     Language.ECMAScript3.PrettyPrint
