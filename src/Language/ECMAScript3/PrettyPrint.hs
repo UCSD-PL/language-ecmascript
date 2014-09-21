@@ -461,17 +461,24 @@ ppListExpression hasIn e = case e of
   ListExpr _ es -> cat $ punctuate comma (map (ppExpression hasIn) es)
   _ -> ppAssignmentExpression hasIn e
 
--- PV Adding new levels for Casts
+-- PV Adding new levels for Cast
+ppUserCastExpression :: Bool -> Expression a -> Doc
+ppUserCastExpression hasIn e = case e of
+  Cast _ e  -> text "UserCast" <> (parens $ ppExpression False e)
+  _         -> ppCastExpression hasIn e
+
+-- PV Adding new levels for Cast_
 ppCastExpression :: Bool -> Expression a -> Doc
 ppCastExpression hasIn e = case e of
-  Cast _ e  ->  text "Cast" <> (parens $ ppExpression False e)
+  Cast_ _ e -> text "Cast" <> (parens $ ppExpression False e)
   _         -> ppListExpression hasIn e
+
 
 -- PV Adding new levels for Super
 ppExpression :: Bool -> Expression a -> Doc
 ppExpression hasIn e = case e of
   SuperRef _ -> text "super"
-  _          -> ppCastExpression hasIn e
+  _          -> ppUserCastExpression hasIn e
 
 
 maybe :: Maybe a -> (a -> Doc) -> Doc
