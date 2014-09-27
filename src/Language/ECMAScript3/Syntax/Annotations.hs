@@ -70,6 +70,7 @@ instance HasAnnotation Expression where
    CallExpr a fn params       -> a
    FuncExpr a mid args s      -> a
    Cast a e                   -> a
+   Cast_ a e                  -> a
    SuperRef a         	      -> a
 
 instance HasAnnotation Statement where
@@ -102,7 +103,7 @@ getAnnotationStmt = go
     go (IfaceStmt a)           = a
     go s                       = error $ "getAnnotationStmt: " ++ (renderStatements [s])
 
-    
+   
 instance HasAnnotation LValue where
   getAnnotation lv = case lv of
     LVar a _ -> a
