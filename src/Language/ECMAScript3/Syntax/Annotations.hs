@@ -1,6 +1,8 @@
 -- | A few helpers to work with the AST annotations
 module Language.ECMAScript3.Syntax.Annotations where
 
+import Language.ECMAScript3.PrettyPrint
+
 import Language.ECMAScript3.Syntax
 import Data.Traversable
 import Control.Applicative
@@ -71,28 +73,35 @@ instance HasAnnotation Expression where
    SuperRef a         	      -> a
 
 instance HasAnnotation Statement where
-  getAnnotation s = case s of
-    BlockStmt a _        -> a
-    EmptyStmt a          -> a
-    ExprStmt a _         -> a
-    IfStmt a _ _ _       -> a
-    IfSingleStmt a _ _   -> a
-    SwitchStmt a _ _     -> a
-    WhileStmt a _ _      -> a
-    DoWhileStmt a _ _    -> a
-    BreakStmt a _        -> a
-    ContinueStmt a _     -> a
-    LabelledStmt a _ _   -> a
-    ForInStmt a _ _ _    -> a
-    ForStmt a _ _ _ _    -> a
-    TryStmt a _ _ _      -> a
-    ThrowStmt a _        -> a
-    ReturnStmt a _       -> a
-    WithStmt a _ _       -> a
-    VarDeclStmt a _      -> a
-    FunctionStmt a _ _ _ -> a
-    ClassStmt a _ _ _ _  -> a
-    ModuleStmt a _ _     -> a
+  getAnnotation = getAnnotationStmt
+
+getAnnotationStmt = go
+  where
+    go (BlockStmt a _        ) = a
+    go (EmptyStmt a          ) = a
+    go (ExprStmt a _         ) = a
+    go (IfStmt a _ _ _       ) = a
+    go (IfSingleStmt a _ _   ) = a
+    go (SwitchStmt a _ _     ) = a
+    go (WhileStmt a _ _      ) = a
+    go (DoWhileStmt a _ _    ) = a
+    go (BreakStmt a _        ) = a
+    go (ContinueStmt a _     ) = a
+    go (LabelledStmt a _ _   ) = a
+    go (ForInStmt a _ _ _    ) = a
+    go (ForStmt a _ _ _ _    ) = a
+    go (TryStmt a _ _ _      ) = a
+    go (ThrowStmt a _        ) = a
+    go (ReturnStmt a _       ) = a
+    go (WithStmt a _ _       ) = a
+    go (VarDeclStmt a _      ) = a
+    go (FunctionStmt a _ _ _ ) = a
+    go (FunctionDecl a _ _)    = a
+    go (ClassStmt a _ _ _ _  ) = a
+    go (ModuleStmt a _ _     ) = a
+    go (IfaceStmt a)           = a
+    go s                       = error $ "getAnnotationStmt: " ++ (renderStatements [s])
+
     
 instance HasAnnotation LValue where
   getAnnotation lv = case lv of
