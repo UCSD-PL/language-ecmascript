@@ -269,8 +269,10 @@ instance Arbitrary a => Arbitrary (Statement a) where
                                      [FunctionStmt as ns parss bs | as <- shrink a, ns <- shrink n, parss <- shrink pars, bs <- shrink b]
   shrink (ClassStmt a id e is ss) = emptyStmtShrink a ++ [ClassStmt na nid ne nis nss | na <- shrink a, nid <- shrink id, ne <- shrink e, nis <- shrink is, nss <- shrink ss]
   shrink (IfaceStmt a) = emptyStmtShrink a
-  shrink (FunctionDecl a i xs ) = emptyStmtShrink a ++ 
-                             [FunctionDecl as is xss | as <- shrink a, is <- shrink i, xss <- shrink xs]
+  shrink (FuncOverload a i xs ) = emptyStmtShrink a ++ 
+                             [FuncOverload as is xss | as <- shrink a, is <- shrink i, xss <- shrink xs]
+  shrink (FuncAmbDecl a i xs ) = emptyStmtShrink a ++ 
+                             [FuncAmbDecl as is xss | as <- shrink a, is <- shrink i, xss <- shrink xs]
   shrink (ModuleStmt a i xs ) = emptyStmtShrink a ++ 
                              [ModuleStmt as is xss | as <- shrink a, is <- shrink i, xss <- shrink xs]
 

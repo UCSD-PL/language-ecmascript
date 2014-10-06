@@ -78,30 +78,31 @@ instance HasAnnotation Statement where
 
 getAnnotationStmt = go
   where
-    go (BlockStmt a _        ) = a
-    go (EmptyStmt a          ) = a
-    go (ExprStmt a _         ) = a
-    go (IfStmt a _ _ _       ) = a
-    go (IfSingleStmt a _ _   ) = a
-    go (SwitchStmt a _ _     ) = a
-    go (WhileStmt a _ _      ) = a
-    go (DoWhileStmt a _ _    ) = a
-    go (BreakStmt a _        ) = a
-    go (ContinueStmt a _     ) = a
-    go (LabelledStmt a _ _   ) = a
-    go (ForInStmt a _ _ _    ) = a
-    go (ForStmt a _ _ _ _    ) = a
-    go (TryStmt a _ _ _      ) = a
-    go (ThrowStmt a _        ) = a
-    go (ReturnStmt a _       ) = a
-    go (WithStmt a _ _       ) = a
-    go (VarDeclStmt a _      ) = a
-    go (FunctionStmt a _ _ _ ) = a
-    go (FunctionDecl a _ _)    = a
-    go (ClassStmt a _ _ _ _  ) = a
-    go (ModuleStmt a _ _     ) = a
-    go (IfaceStmt a)           = a
-    go s                       = error $ "getAnnotationStmt: " ++ (renderStatements [s])
+    go (BlockStmt a _            ) = a
+    go (EmptyStmt a              ) = a
+    go (ExprStmt a _             ) = a
+    go (IfStmt a _ _ _           ) = a
+    go (IfSingleStmt a _ _       ) = a
+    go (SwitchStmt a _ _         ) = a
+    go (WhileStmt a _ _          ) = a
+    go (DoWhileStmt a _ _        ) = a
+    go (BreakStmt a _            ) = a
+    go (ContinueStmt a _         ) = a
+    go (LabelledStmt a _ _       ) = a
+    go (ForInStmt a _ _ _        ) = a
+    go (ForStmt a _ _ _ _        ) = a
+    go (TryStmt a _ _ _          ) = a
+    go (ThrowStmt a _            ) = a
+    go (ReturnStmt a _           ) = a
+    go (WithStmt a _ _           ) = a
+    go (VarDeclStmt a _          ) = a
+    go (FunctionStmt a _ _ _     ) = a
+    go (FuncAmbDecl a _ _) = a
+    go (FuncOverload a _ _   ) = a
+    go (ClassStmt a _ _ _ _      ) = a
+    go (ModuleStmt a _ _         ) = a
+    go (IfaceStmt a              ) = a
+    go s                           = error $ "getAnnotationStmt: " ++ (renderStatements [s])
 
    
 instance HasAnnotation LValue where

@@ -237,7 +237,8 @@ data Statement a
 
   -- ^ TypeScipt
   
-  | FunctionDecl a (Id a) {-name-} [Id a] {-args-}
+  | FuncAmbDecl a (Id a) {-name-} [Id a] {-args-}
+  | FuncOverload a (Id a) {-name-} [Id a] {-args-}
     -- ^ @declare function f(x, y, z); @
   | ClassStmt a (Id a) (Maybe (Id a)) {-extends-} [Id a] {-implem-} [ClassElt a]
     -- ^ @class C<V> extends C'<T> {...}@

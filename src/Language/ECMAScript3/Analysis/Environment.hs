@@ -107,7 +107,8 @@ stmt :: Statement SourcePos -> Partial
 stmt s = case s of
   BlockStmt _ ss -> unions $ map stmt ss
   EmptyStmt _ -> empty
-  FunctionDecl _ _ _ -> empty
+  FuncOverload _ _ _ -> empty
+  FuncAmbDecl _ _ _ -> empty
   ClassStmt _ _ _ _ ss -> unions $ map classElt ss
   ExprStmt _ e -> expr e
   IfStmt _ e s1 s2 -> unions [expr e, stmt s1, stmt s2]

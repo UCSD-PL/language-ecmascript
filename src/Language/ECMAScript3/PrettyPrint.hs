@@ -175,7 +175,10 @@ ppStatement s = case s of
         is -> text "implements" <+> cat (punctuate comma (map ppId is))) $$
     classEltAsBlock body
 
-  FunctionDecl _ name args ->
+  FuncAmbDecl _ name args ->
+    text "declare function" <+> ppId name <> 
+    parens (cat $ punctuate comma (map ppId args))
+  FuncOverload _ name args ->
     text "function" <+> ppId name <> 
     parens (cat $ punctuate comma (map ppId args))
   ModuleStmt _ name body ->
