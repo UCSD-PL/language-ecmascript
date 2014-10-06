@@ -402,53 +402,53 @@ parseConstructor = do
           return             $ Constructor span args body)
 
 parseMemberFuncDecl :: Stream s Identity Char => ClassEltParser s t
-parseMemberFuncDecl = do
-  try (do s@(PST e _ _)     <- getState
-          let (EP tP _ _ _)  = e s
-          a                 <- inAnnotP tP
-          pos               <- getPosition
-          {-mod               <- try (reserved "public" >> return True) -}
-                           {-<|> try (option True (reserved "private" >> return False))-}
-          static            <- option False (reserved "static" >> return True)
-          name              <- identifier
-          args              <- parens (identifier `sepBy` comma)
-          BlockStmt _ body  <- withFreshLabelStack parseBlockStmt <?> 
-                                "method body in { ... }"
-          pos'              <- getPosition
-          let span           = Span pos pos'
-          PST e s l         <- getState
-          putState           $ PST e (updSpan span (Just a) s) l
-          return             $ MemberMethDecl span {-mod-} static name args body)
-
-parseMemberVarDecl :: Stream s Identity Char => ClassEltParser s t
-parseMemberVarDecl = do
-  try (do pos               <- getPosition
-          {-mod               <- try (reserved "public" >> return True) -}
-                           {-<|> try (option True (reserved "private" >> return False))-}
-          static            <- option False (reserved "static" >> return True)
-          varDecl           <- parseVarDecl
-          pos'              <- getPosition
-          let span           = Span pos pos'
-          semi
-          return             $ MemberVarDecl span {-mod-} static varDecl)
+parseMemberFuncDecl = undefined 
+-- do try (do s@(PST e _ _)     <- getState
+--            let (EP tP _ _ _)  = e s
+--            a                 <- inAnnotP tP
+--            pos               <- getPosition
+--            {-mod               <- try (reserved "public" >> return True) -}
+--                             {-<|> try (option True (reserved "private" >> return False))-}
+--            static            <- option False (reserved "static" >> return True)
+--            name              <- identifier
+--            args              <- parens (identifier `sepBy` comma)
+--            BlockStmt _ body  <- withFreshLabelStack parseBlockStmt <?> 
+--                                  "method body in { ... }"
+--            pos'              <- getPosition
+--            let span           = Span pos pos'
+--            PST e s l         <- getState
+--            putState           $ PST e (updSpan span (Just a) s) l
+--            return             $ MemberMethDecl span {-mod-} static name args body)
+-- 
+-- parseMemberVarDecl :: Stream s Identity Char => ClassEltParser s t
+-- parseMemberVarDecl = do
+--   try (do pos               <- getPosition
+--           {-mod               <- try (reserved "public" >> return True) -}
+--                            {-<|> try (option True (reserved "private" >> return False))-}
+--           static            <- option False (reserved "static" >> return True)
+--           varDecl           <- parseVarDecl
+--           pos'              <- getPosition
+--           let span           = Span pos pos'
+--           semi
+--           return             $ MemberVarDecl span {-mod-} static varDecl)
 
 
 parseClassStmt :: Stream s Identity Char => StatementParser s t
-parseClassStmt = 
-  try (do pos     <- getPosition
-          name    <- try (reserved "class" >> identifier)
-          extends <- optionMaybe (reserved "extends" >> identifier)
-          impls   <- maybeToList <$> optionMaybe (reserved "implements" >> identifier `sepBy` comma)
-          t       <- braces (parseClassElement `sepBy` whiteSpace)
-          pos'    <- getPosition
-          let span = Span pos pos'
-          return   $ ClassStmt span name extends impls t)
-
+parseClassStmt = undefined 
+--   try (do pos     <- getPosition
+--           name    <- try (reserved "class" >> identifier)
+--           extends <- optionMaybe (reserved "extends" >> identifier)
+--           impls   <- maybeToList <$> optionMaybe (reserved "implements" >> identifier `sepBy` comma)
+--           t       <- braces (parseClassElement `sepBy` whiteSpace)
+--           pos'    <- getPosition
+--           let span = Span pos pos'
+--           return   $ ClassStmt span name extends impls t)
+-- 
 maybeToList Nothing   = []
 maybeToList (Just xs) = xs
 
-parseClassElement :: Stream s Identity Char =>  ClassEltParser s t 
-parseClassElement = parseConstructor <|> parseMemberFuncDecl <|> parseMemberVarDecl
+-- parseClassElement :: Stream s Identity Char =>  ClassEltParser s t 
+-- parseClassElement = parseConstructor <|> parseMemberFuncDecl <|> parseMemberVarDecl
 
             
 

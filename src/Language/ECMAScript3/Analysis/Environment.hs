@@ -134,9 +134,11 @@ stmt s = case s of
                                       unions $ map stmt ss]]
 
 classElt :: ClassElt SourcePos -> Partial
-classElt (Constructor _ _ ss) = unions $ map stmt ss
-classElt (MemberVarDecl _ _ c) = varDecl c
-classElt (MemberMethDecl _ _ _ _ ss) = unions $ map stmt ss
+classElt = error "[UNIMPLEMENTED] classElt" 
+-- classElt (Constructor _ _ ss) = unions $ map stmt ss
+-- classElt (MemberVarDef _ _ c) = varDecl c
+-- classElt (MemberVarDecl _ _ ) = varDecl c
+-- classElt (MemberMethDecl _ _ _ _ ss) = unions $ map stmt ss
 
 -- |The statically-determinate lexical structure of a JavaScript program.
 data EnvTree = EnvTree (M.Map String SourcePos) [EnvTree]

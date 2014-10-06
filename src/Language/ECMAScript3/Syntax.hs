@@ -245,8 +245,7 @@ data Statement a
     -- ^ @module M {...}@
   | IfaceStmt a
     -- ^ @interface A {...}@ 
-    -- Just a placeholder for interface annotations 
-    -- (instead of using an EmptyStmt)
+    -- Placeholder for interface annotations
 
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable,Generic)
 
@@ -259,9 +258,14 @@ data Statement a
 --
 
 data ClassElt a   -- Class element, spec 8.1.2
-  = Constructor a [Id a] {-args-} [Statement a] {-body-}
-  | MemberVarDecl a Bool {-static-} (VarDecl a)
-  | MemberMethDecl a Bool {-static-} (Id a) [Id a] [Statement a] 
+  = Constructor     a                        [Id a] [Statement a]
+
+  | MemberVarDecl   a Bool {-static-} (Id a)        (Maybe (Expression a)) 
+
+  | MemberMethDecl  a Bool {-static-} (Id a) [Id a]
+
+  | MemberMethDef   a Bool {-static-} (Id a) [Id a] [Statement a] 
+
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable, Generic)
 
 
