@@ -133,6 +133,8 @@ stmt s = case s of
   FunctionStmt _ fnId args ss ->
     unions [decl fnId, nest $ unions [unions $ map decl args,
                                       unions $ map stmt ss]]
+  EnumStmt _ enId elts -> 
+    unions $ decl enId : map decl elts
 
 classElt :: ClassElt SourcePos -> Partial
 classElt = error "[UNIMPLEMENTED] classElt" 

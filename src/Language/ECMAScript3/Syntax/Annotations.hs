@@ -97,11 +97,12 @@ getAnnotationStmt = go
     go (WithStmt a _ _           ) = a
     go (VarDeclStmt a _          ) = a
     go (FunctionStmt a _ _ _     ) = a
-    go (FuncAmbDecl a _ _) = a
-    go (FuncOverload a _ _   ) = a
+    go (FuncAmbDecl a _ _        ) = a
+    go (FuncOverload a _ _       ) = a
     go (ClassStmt a _ _ _ _      ) = a
     go (ModuleStmt a _ _         ) = a
     go (IfaceStmt a              ) = a
+    go (EnumStmt a _ _           ) = a
     go s                           = error $ "getAnnotationStmt: " ++ (renderStatements [s])
 
    

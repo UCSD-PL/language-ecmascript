@@ -184,8 +184,8 @@ ppStatement s = case s of
   ModuleStmt _ name body ->
     text "module" <+> ppId name $$ ssAsBlock body
   IfaceStmt _ -> text "// interface placeholder"
-
-
+  EnumStmt _ name elts -> text "enumeration" <+> ppId name <+>
+    braces (cat $ punctuate comma (map ppId elts)) 
 
 ppClassElt :: ClassElt a -> Doc
 ppClassElt (Constructor _ args body) = 

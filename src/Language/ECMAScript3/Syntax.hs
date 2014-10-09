@@ -245,8 +245,8 @@ data Statement a
   | ModuleStmt a (Id a) [Statement a]
     -- ^ @module M {...}@
   | IfaceStmt a
-    -- ^ @interface A {...}@ 
-    -- Placeholder for interface annotations
+    -- ^ @interface A {...}@ -- Placeholder for interface annotations
+  | EnumStmt a (Id a) [Id a]
 
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable,Generic)
 
