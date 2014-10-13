@@ -90,6 +90,8 @@ classEltAsBlock = asBlock classEltList
 
 ppId (Id _ str) = text str
 
+ppEnumElt (EnumElt _ (Id _ str) i) = text str <+> text "=" <+> text (show i)
+
 ppForInit :: ForInit a -> Doc
 ppForInit t = case t of
   NoInit     -> empty
@@ -185,7 +187,7 @@ ppStatement s = case s of
     text "module" <+> ppId name $$ ssAsBlock body
   IfaceStmt _ -> text "// interface placeholder"
   EnumStmt _ name elts -> text "enumeration" <+> ppId name <+>
-    braces (cat $ punctuate comma (map ppId elts)) 
+    braces (cat $ punctuate comma (map ppEnumElt elts)) 
 
 ppClassElt :: ClassElt a -> Doc
 ppClassElt (Constructor _ args body) = 

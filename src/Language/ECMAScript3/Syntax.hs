@@ -25,6 +25,7 @@ module Language.ECMAScript3.Syntax (JavaScript(..)
                                    ,Prop(..)
                                    ,UnaryAssignOp(..)
                                    ,LValue (..)
+                                   ,EnumElt(..)
                                    ,SourcePos
                                    ) where
 
@@ -246,7 +247,7 @@ data Statement a
     -- ^ @module M {...}@
   | IfaceStmt a
     -- ^ @interface A {...}@ -- Placeholder for interface annotations
-  | EnumStmt a (Id a) [Id a]
+  | EnumStmt a (Id a) [EnumElt a]
 
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable,Generic)
 
@@ -267,6 +268,9 @@ data ClassElt a   -- Class element, spec 8.1.2
 
   | MemberMethDef   a Bool {-static-} (Id a) [Id a] [Statement a] 
 
+  deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable, Generic)
+
+data EnumElt a = EnumElt a (Id a) (Maybe Int)
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable, Generic)
 
 
