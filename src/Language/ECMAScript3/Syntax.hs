@@ -245,7 +245,7 @@ data Statement a
     -- ^ @class C<V> extends C'<T> {...}@
   | ModuleStmt a (Id a) [Statement a]
     -- ^ @module M {...}@
-  | IfaceStmt a
+  | IfaceStmt a (Id a) 
     -- ^ @interface A {...}@ -- Placeholder for interface annotations
   | EnumStmt a (Id a) [EnumElt a]
 

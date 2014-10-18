@@ -185,7 +185,7 @@ ppStatement s = case s of
     parens (cat $ punctuate comma (map ppId args))
   ModuleStmt _ name body ->
     text "module" <+> ppId name $$ ssAsBlock body
-  IfaceStmt _ -> text "// interface placeholder"
+  IfaceStmt _ x -> text "// interface" <+> ppId x
   EnumStmt _ name elts -> text "enumeration" <+> ppId name <+>
     braces (cat $ punctuate comma (map ppEnumElt elts)) 
 

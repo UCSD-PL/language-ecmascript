@@ -129,7 +129,7 @@ stmt s = case s of
   WithStmt _ e s -> unions [expr e, stmt s]
   VarDeclStmt _ decls -> unions $ map varDecl decls
   ModuleStmt _ _ ss -> unions $ map stmt ss
-  IfaceStmt _ -> empty
+  IfaceStmt _ _ -> empty
   FunctionStmt _ fnId args ss ->
     unions [decl fnId, nest $ unions [unions $ map decl args,
                                       unions $ map stmt ss]]
