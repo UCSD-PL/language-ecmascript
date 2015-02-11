@@ -57,6 +57,7 @@ expr e = case e of
   StringLit _ _ -> empty
   RegexpLit {} -> empty
   NumLit _ _ -> empty
+  HexLit _ _ -> empty
   IntLit _ _ -> empty
   BoolLit _ _ -> empty
   NullLit _ -> empty

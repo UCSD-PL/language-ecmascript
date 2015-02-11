@@ -130,6 +130,7 @@ instance Arbitrary a => Arbitrary (Expression a) where
           (0, liftM  SuperRef arbitrary),
           (0, liftM2 StringLit arbitrary arbitrary),
           (0, liftM2 NumLit arbitrary nonNegative),
+          (0, liftM2 HexLit arbitrary nonNegative),
           (0, liftM2 IntLit arbitrary nonNegative),
           (0, liftM2 BoolLit arbitrary arbitrary),
           (0, liftM4 RegexpLit arbitrary regexpBody arbitrary arbitrary),
@@ -151,6 +152,7 @@ instance Arbitrary a => Arbitrary (Expression a) where
   shrink (StringLit a s) = [StringLit na ns | na <- shrink a, ns <- shrink s]
   shrink (RegexpLit a s b1 b2) = [RegexpLit na ns nb1 nb2 | na <- shrink a, nb1 <- shrink b1, nb2 <- shrink b2, ns <- shrink s]
   shrink (NumLit a d) = [NumLit na nd | na <- shrink a, nd <- shrink d]
+  shrink (HexLit a d) = [HexLit na nd | na <- shrink a, nd <- shrink d]
   shrink (IntLit a i) = [IntLit na ni | na <- shrink a, ni <- shrink i]
   shrink (BoolLit a b) = [BoolLit na nb | na <- shrink a, nb <- shrink b]
   shrink (NullLit a) = [NullLit na | na <- shrink a]

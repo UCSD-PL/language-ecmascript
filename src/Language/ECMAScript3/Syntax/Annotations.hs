@@ -51,6 +51,7 @@ instance HasAnnotation Expression where
    StringLit a s              -> a
    RegexpLit a s g ci         -> a
    NumLit a d                 -> a
+   HexLit a d                 -> a
    IntLit a i                 -> a
    BoolLit a b                -> a
    NullLit a                  -> a

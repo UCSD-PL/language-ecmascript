@@ -315,6 +315,7 @@ ppPrimaryExpression e = case e of
   BoolLit _ True -> text "true"
   BoolLit _ False -> text "false"
   NumLit  _ n -> text (show n)
+  HexLit  _ s -> text (show s)
   IntLit _ n ->  text (show n)
   StringLit _ str -> doubleQuotes (text (jsEscape str))
   RegexpLit _ reg g ci -> text "/" <> (text (regexpEscape reg)) <> text "/" <>

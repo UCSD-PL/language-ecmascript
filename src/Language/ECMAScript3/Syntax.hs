@@ -140,6 +140,12 @@ data Expression a
   | NullLit a -- ^ @null@, spec 11.1.3, 7.8
   | ArrayLit a [Expression a] -- ^ @[1,2,3]@, spec 11.1.4
   | ObjectLit a [(Prop a, Expression a)] -- ^ @{foo:\"bar\", baz: 42}@, spec 11.1.5
+
+  -- 
+  -- RefScript Hex literal -- Used as BitVector
+  --
+  | HexLit a String
+
   | ThisRef a -- ^ @this@, spec 11.1.1
   | VarRef a (Id a) -- ^ @foo@, spec 11.1.2
   | DotRef a (Expression a) (Id a) -- ^ @foo.bar@, spec 11.2.1
@@ -163,7 +169,10 @@ data Expression a
   --funcexprs are optionally named
   | FuncExpr a (Maybe (Id a)) [Id a] [Statement a]
     -- ^ @function f (x,y,z) {...}@, spec 11.2.5, 13
-  -- PV adding cast expression, the casted type will be in the annotation a
+
+  -- 
+  -- RefScript Cast expressions
+  --
   | Cast  a (Expression a)    -- ^ User inserted cast
   | Cast_ a (Expression a)    -- ^ Implicitly created cast
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable,Generic)
