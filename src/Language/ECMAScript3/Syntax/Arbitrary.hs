@@ -130,7 +130,7 @@ instance Arbitrary a => Arbitrary (Expression a) where
           (0, liftM  SuperRef arbitrary),
           (0, liftM2 StringLit arbitrary arbitrary),
           (0, liftM2 NumLit arbitrary nonNegative),
-          (0, liftM2 HexLit arbitrary nonNegative),
+          (0, liftM2 HexLit arbitrary arbitrary),
           (0, liftM2 IntLit arbitrary nonNegative),
           (0, liftM2 BoolLit arbitrary arbitrary),
           (0, liftM4 RegexpLit arbitrary regexpBody arbitrary arbitrary),
