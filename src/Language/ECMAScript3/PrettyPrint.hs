@@ -90,8 +90,7 @@ classEltAsBlock = asBlock classEltList
 
 ppId (Id _ str) = text str
 
-ppEnumElt (EnumElt _ (Id _ str) (Just e)) = text str <+> text "=" <+> ppExpression True e
-ppEnumElt (EnumElt _ (Id _ str) Nothing ) = text str
+ppEnumElt (EnumElt _ (Id _ str) e) = text str <+> text "=" <+> ppExpression True e
 
 ppForInit :: ForInit a -> Doc
 ppForInit t = case t of

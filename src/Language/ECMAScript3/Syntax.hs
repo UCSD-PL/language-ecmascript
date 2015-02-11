@@ -279,7 +279,7 @@ data ClassElt a   -- Class element, spec 8.1.2
 
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable, Generic)
 
-data EnumElt a = EnumElt a (Id a) (Maybe (Expression a))
+data EnumElt a = EnumElt a (Id a) (Expression a)
   deriving (Show,Data,Typeable,Eq,Ord,Functor,Foldable,Traversable, Generic)
 
 
